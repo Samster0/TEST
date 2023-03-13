@@ -14,7 +14,7 @@ namespace Test.Items
 
         public override void SetDefaults()
         {
-            Item.damage = 1000;
+            Item.damage = 100;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 40;
             Item.height = 20;
@@ -28,7 +28,7 @@ namespace Test.Items
             Item.UseSound = SoundID.Item5;
             Item.autoReuse = true;
             Item.shoot = ProjectileID.InfluxWaver;
-            Item.shootSpeed = 50f;
+            Item.shootSpeed = 10f;
         }
 
  
