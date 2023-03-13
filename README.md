@@ -1,0 +1,2 @@
+# TEST
+ Funny mod
