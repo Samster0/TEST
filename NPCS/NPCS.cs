@@ -4,13 +4,13 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Utilities;
 
-namespace TEST.NPCS
+namespace TEST.NPCs
 {
     public class NPCS : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tru's Horrible Idea");
+            DisplayName.SetDefault("TRU");
             Main.npcFrameCount[NPC.type] = Main.npcFrameCount[2];
         }
 
@@ -65,21 +65,20 @@ namespace TEST.NPCS
                     Player target = Main.player[NPC.target];
                     Vector2 direction = target.Center - NPC.Center;
                     direction.Normalize();
-                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.Fireball, NPC.damage, 0f);
+                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.FlamingScythe, NPC.damage, 0f);
                   
                 }
             }
             else
             {
                 // boss attacks more aggressively when its health is below 50%
-                NPC.velocity = new Vector2(4f, 0f);
                 if (NPC.frameCounter % 30 == 0)
                 {
                     // boss does an attack every half second
                     Player target = Main.player[NPC.target];
                     Vector2 direction = target.Center - NPC.Center;
                     direction.Normalize();
-                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.Fireball, NPC.damage, 0f);
+                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.FrostWave, NPC.damage, 0f);
                 }
             }
         }
