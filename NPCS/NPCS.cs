@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Utilities;
+using TEST.Projectiles;
 
 namespace TEST.NPCs
 {
@@ -19,17 +20,19 @@ namespace TEST.NPCs
             NPC.width = 32;
             NPC.height = 15;
             NPC.damage = 99;
-            NPC.defense = 300;
+            NPC.defense = 30;
             NPC.lifeMax = 2000;
             NPC.value = 50f;
-            NPC.aiStyle = 51;
+            NPC.aiStyle = -1;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.boss = true;
             NPC.noGravity = true;
-          
+            Music = MusicID.Plantera;
+            NPC.noTileCollide = true;
+            NPC.knockBackResist = 0f;
 
-            
+
 
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -55,6 +58,12 @@ namespace TEST.NPCs
 
         public override void AI()
         {
+            Player player = Main.player[NPC.target];
+            NPC.TargetClosest(true);
+            if (NPC.Distance(player.Center) > 100)
+            {
+                NPC.velocity = Vector2.Normalize(player.Center - NPC.Center) * 6f;
+            }
             if (NPC.life > NPC.lifeMax / 2)
             {
                 // boss attacks when its health is above 50%
@@ -65,8 +74,9 @@ namespace TEST.NPCs
                     Player target = Main.player[NPC.target];
                     Vector2 direction = target.Center - NPC.Center;
                     direction.Normalize();
-                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.FlamingScythe, NPC.damage, 0f);
-                  
+                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ModContent.ProjectileType<Funnything>(), NPC.damage, 50f);
+
+
                 }
             }
             else
