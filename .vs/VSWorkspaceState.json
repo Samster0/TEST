@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Items",
-    "\\NPCS"
+    "\\NPCs",
+    "\\Projectiles"
   ],
-  "SelectedNode": "\\Items\\Class1.cs",
+  "SelectedNode": "\\Projectiles\\Funnything.cs",
   "PreviewInSolutionExplorer": false
 }

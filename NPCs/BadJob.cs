@@ -5,13 +5,14 @@ using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Utilities;
 using TEST.Projectiles;
 
+
 namespace TEST.NPCs
 {
-    public class NPCS : ModNPC
+    public class BadJob : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("TRU");
+            DisplayName.SetDefault("Elemental Keeper");
             Main.npcFrameCount[NPC.type] = Main.npcFrameCount[2];
         }
 
@@ -43,7 +44,7 @@ namespace TEST.NPCs
         public override void FindFrame(int frameHeight)
         {
             NPC.frameCounter++;
-            if (NPC.frameCounter >= 20) 
+            if (NPC.frameCounter >= 20)
             {
                 NPC.frameCounter = 0;
             }
@@ -67,7 +68,7 @@ namespace TEST.NPCs
             if (NPC.life > NPC.lifeMax / 2)
             {
                 // boss attacks when its health is above 50%
-               
+
                 if (NPC.frameCounter % 60 == 0)
                 {
                     // boss does an attack every second
@@ -79,24 +80,57 @@ namespace TEST.NPCs
 
                 }
             }
-            else
+            if(NPC.life < NPC.lifeMax / 2)
             {
-                // boss attacks more aggressively when its health is below 50%
-                if (NPC.frameCounter % 30 == 0)
+                if (NPC.ai[0] == 0f)
                 {
-                    // boss does an attack every half second
-                    Player target = Main.player[NPC.target];
-                    Vector2 direction = target.Center - NPC.Center;
-                    direction.Normalize();
-                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.FrostWave, NPC.damage, 0f);
+                    var entitySource = NPC.GetSource_FromAI();
+                    int index = NPC.NewNPC(entitySource, (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<NPCs.Classy>(), NPC.whoAmI);
+                    NPC minionNPC = Main.npc[index];
+
+
+
+
+                   
                 }
+
             }
+            if (NPC.life < NPC.lifeMax / 2)
+            {
+                if (NPC.ai[0] == 0f)
+                {
+                    var entitySource = NPC.GetSource_FromAI();
+                    int index = NPC.NewNPC(entitySource, (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<NPCs.Hallow>(), NPC.whoAmI);
+                    NPC minionNPC = Main.npc[index];
+
+
+
+
+                    
+                }
+
+            }
+            if (NPC.life < NPC.lifeMax / 2)
+            {
+                if (NPC.ai[0] == 0f)
+                {
+                    var entitySource = NPC.GetSource_FromAI();
+                    int index = NPC.NewNPC(entitySource, (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<NPCs.Crim>(), NPC.whoAmI);
+                    NPC minionNPC = Main.npc[index];
+
+                    NPC.life = 0;
+                    NPC.checkDead();
+
+
+                    NPC.ai[0] = 1f;
+                }
+
+            }
+
+
+
+
+
         }
-
-
-
-
-
-
     }
 }
