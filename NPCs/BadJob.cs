@@ -4,42 +4,52 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Utilities;
 using TEST.Projectiles;
-
+using Terraria.Graphics.Capture;
+using System;
+using Terraria.Audio;
+using Terraria.Utilities;
+using System.Security.Cryptography.X509Certificates;
+using TEST.Items;
+using System.Net.Security;
 
 namespace TEST.NPCs
 {
+
     public class BadJob : ModNPC
     {
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Elemental Keeper");
-            Main.npcFrameCount[NPC.type] = Main.npcFrameCount[2];
+            Main.npcFrameCount[Type] = 6;
+
         }
 
         public override void SetDefaults()
         {
-            NPC.width = 32;
-            NPC.height = 15;
-            NPC.damage = 99;
+            NPC.width = 110;
+            NPC.height = 110;
+            NPC.SpawnWithHigherTime(30);
+            NPC.damage = 120;
             NPC.defense = 30;
-            NPC.lifeMax = 2000;
+            NPC.lifeMax = 60000;
             NPC.value = 50f;
-            NPC.aiStyle = -1;
+            NPC.aiStyle = 31;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.boss = true;
             NPC.noGravity = true;
-            Music = MusicID.Plantera;
             NPC.noTileCollide = true;
             NPC.knockBackResist = 0f;
+         
+            NPC.stepSpeed = 100f;
 
-
-
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Items/Boo");
+            }
         }
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
-        {
-            return SpawnCondition.OverworldDaySlime.Chance * 100f;
-        }
+
 
         public override void FindFrame(int frameHeight)
         {
@@ -53,8 +63,7 @@ namespace TEST.NPCs
 
         public override void OnKill()
         {
-            Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.VortexBeater, Main.rand.Next(0, 2));
-            Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.TempleKey, Main.rand.Next(5, 10));
+            Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.GreaterHealingPotion, Main.rand.Next(10, 15));
         }
 
         public override void AI()
@@ -63,24 +72,31 @@ namespace TEST.NPCs
             NPC.TargetClosest(true);
             if (NPC.Distance(player.Center) > 100)
             {
-                NPC.velocity = Vector2.Normalize(player.Center - NPC.Center) * 6f;
+                NPC.velocity = Vector2.Normalize(player.Center - NPC.Center) * 8f;
             }
-            if (NPC.life > NPC.lifeMax / 2)
+
+            if (NPC.frameCounter % 250 == 0)
             {
-                // boss attacks when its health is above 50%
-
-                if (NPC.frameCounter % 60 == 0)
-                {
-                    // boss does an attack every second
-                    Player target = Main.player[NPC.target];
-                    Vector2 direction = target.Center - NPC.Center;
-                    direction.Normalize();
-                    int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ModContent.ProjectileType<Funnything>(), NPC.damage, 50f);
+                // boss does an attack every second
+                Player target = Main.player[NPC.target];
+                Vector2 direction = target.Center - NPC.Center;
+                direction.Normalize();
+                int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.EyeFire, NPC.damage, 50f);
 
 
-                }
             }
-            if(NPC.life < NPC.lifeMax / 2)
+            if (NPC.frameCounter % 250 == 0)
+            {
+                // boss does an attack every second
+                Player target = Main.player[NPC.target];
+                Vector2 direction = target.Center - NPC.Center;
+                direction.Normalize();
+                int projectile = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 10f, ProjectileID.EyeLaser, NPC.damage, 50f);
+
+
+            }
+
+            if (NPC.life < NPC.lifeMax / 2)
             {
                 if (NPC.ai[0] == 0f)
                 {
@@ -88,10 +104,12 @@ namespace TEST.NPCs
                     int index = NPC.NewNPC(entitySource, (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<NPCs.Classy>(), NPC.whoAmI);
                     NPC minionNPC = Main.npc[index];
 
+                    {
+                        Main.NewText("The spirits of light and dark have escaped, to kill you!");
+                    }
 
 
 
-                   
                 }
 
             }
@@ -106,7 +124,7 @@ namespace TEST.NPCs
 
 
 
-                    
+
                 }
 
             }
@@ -114,6 +132,7 @@ namespace TEST.NPCs
             {
                 if (NPC.ai[0] == 0f)
                 {
+
                     var entitySource = NPC.GetSource_FromAI();
                     int index = NPC.NewNPC(entitySource, (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<NPCs.Crim>(), NPC.whoAmI);
                     NPC minionNPC = Main.npc[index];
@@ -128,8 +147,13 @@ namespace TEST.NPCs
             }
 
 
+            if (Main.player[NPC.target].dead)
+            {
+
+                NPC.active = false;
 
 
+            }
 
         }
     }

@@ -1,0 +1,38 @@
+
+Mods: {
+	TEST: {
+		Items: {
+			BYE: {
+				DisplayName: Fixed Energy Sword
+				Tooltip: Fret would be dissapointed
+			}
+
+			ExampleFlail: {
+				DisplayName: The Blades of Chaos
+				Tooltip: "'I am your monster no longer'"
+			}
+
+			GOOD: {
+				DisplayName: Duelist Energy Sword
+				Tooltip: A noble and ancient weapon, wielded by the strongest of Sangheili
+			}
+
+			HI: {
+				DisplayName: Energy Sword
+				Tooltip: Also known as a plasma sword
+			}
+		}
+
+		NPCs: {
+			BadJob.DisplayName: Elemental Keeper
+			Classy.DisplayName: M
+			Crim.DisplayName: Minion Boss Minion
+			Hallow.DisplayName: Minion Boss Minion
+		}
+
+		Projectiles: {
+			Funnything.DisplayName: Tru
+			TheBlades.DisplayName: HI
+		}
+	}
+}

@@ -17,17 +17,19 @@ namespace TEST.NPCs
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("M");
-            Main.npcFrameCount[Type] = 1;
+            DisplayName.SetDefault("Shadow Keeper");
+            Main.npcFrameCount[Type] = 6;
         }
 
         public override void SetDefaults()
         {
-            NPC.width = 30;
-            NPC.height = 30;
+            NPC.width = 110;
+            NPC.height = 110;
+            NPC.SpawnWithHigherTime(30);
+ 
             NPC.damage = 7;
             NPC.defense = 0;
-            NPC.lifeMax = 5000;
+            NPC.lifeMax = 15000;
             NPC.HitSound = SoundID.NPCHit9;
             NPC.DeathSound = SoundID.NPCDeath11;
             NPC.noGravity = true;
@@ -36,9 +38,18 @@ namespace TEST.NPCs
             NPC.netAlways = true;
             NPC.boss = true;
             NPC.aiStyle = 31;
+         
         }
 
-        
+        public override void AI()
+        { 
 
-    }
+                    if (Main.player[NPC.target].dead)
+            
+
+                NPC.active = false;
+
+
+        }
+}
 }
