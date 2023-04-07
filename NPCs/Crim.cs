@@ -429,7 +429,7 @@ namespace TEST.NPCs
                 float kitingOffsetX = Utils.Clamp(player.velocity.X * 16, -100, 100);
                 Vector2 position = player.Bottom + new Vector2(kitingOffsetX + Main.rand.Next(-100, 100), Main.rand.Next(50, 100));
 
-                int type = ProjectileID.BloodCloudRaining;
+                int type = ProjectileID.CultistBossFireBallClone;
                 int damage = NPC.damage / 2;
                 var entitySource = NPC.GetSource_FromAI();
 
