@@ -36,7 +36,7 @@ namespace TEST.NPCs
             NPC.knockBackResist = 0f;
             NPC.netAlways = true;
             NPC.boss= true;
-
+            Music = MusicID.TheHallow;
             NPC.aiStyle = 31;
         }
 

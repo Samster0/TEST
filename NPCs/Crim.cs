@@ -102,7 +102,7 @@ namespace TEST.NPCs
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Minion Boss");
+            DisplayName.SetDefault("Shadow Keeper");
             Main.npcFrameCount[Type] = 6;
 
 

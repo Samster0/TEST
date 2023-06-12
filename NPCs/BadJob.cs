@@ -11,13 +11,14 @@ using Terraria.Utilities;
 using System.Security.Cryptography.X509Certificates;
 using TEST.Items;
 using System.Net.Security;
+using IL.Terraria.DataStructures;
 
 namespace TEST.NPCs
 {
-
+    
     public class BadJob : ModNPC
     {
-
+        public int up = 1;
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Elemental Keeper");
@@ -41,13 +42,8 @@ namespace TEST.NPCs
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             NPC.knockBackResist = 0f;
-         
             NPC.stepSpeed = 100f;
-
-            if (!Main.dedServ)
-            {
-                Music = MusicLoader.GetMusicSlot(Mod, "Items/Boo");
-            }
+            Music = MusicID.OldOnesArmy;
         }
 
 
@@ -68,6 +64,12 @@ namespace TEST.NPCs
 
         public override void AI()
         {
+            if (NPC.active == true)
+            {
+      
+                 up = 2;
+
+            }
             Player player = Main.player[NPC.target];
             NPC.TargetClosest(true);
             if (NPC.Distance(player.Center) > 100)
@@ -98,15 +100,16 @@ namespace TEST.NPCs
 
             if (NPC.life < NPC.lifeMax / 2)
             {
+                {
+                    Main.NewText("The spirits of light and dark have escaped, to kill you!");
+                }
                 if (NPC.ai[0] == 0f)
                 {
                     var entitySource = NPC.GetSource_FromAI();
                     int index = NPC.NewNPC(entitySource, (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<NPCs.Classy>(), NPC.whoAmI);
                     NPC minionNPC = Main.npc[index];
 
-                    {
-                        Main.NewText("The spirits of light and dark have escaped, to kill you!");
-                    }
+
 
 
 

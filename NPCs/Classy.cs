@@ -17,7 +17,7 @@ namespace TEST.NPCs
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shadow Keeper");
+            DisplayName.SetDefault("Bloodshaken Brute");
             Main.npcFrameCount[Type] = 6;
         }
 

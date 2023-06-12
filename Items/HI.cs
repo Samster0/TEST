@@ -13,7 +13,7 @@ namespace TEST.Items
 		{
 			// DisplayName.SetDefault("HI"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
 			Tooltip.SetDefault("Also known as a plasma sword");
-			DisplayName.SetDefault("Energy Sword");
+			DisplayName.SetDefault("Broken Energy Sword");
 		}
 
 		public override void SetDefaults()
