@@ -76,7 +76,7 @@ namespace TEST.NPCs
         {
             NPC.width = 30;
             NPC.height = 30;
-            NPC.damage = 7;
+            NPC.damage = 70;
             NPC.defense = 0;
             NPC.lifeMax = 5000;
             NPC.HitSound = SoundID.NPCHit9;

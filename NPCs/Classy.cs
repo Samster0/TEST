@@ -34,7 +34,7 @@ namespace TEST.NPCs
             NPC.DeathSound = SoundID.NPCDeath11;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
-            NPC.knockBackResist = 0.8f;
+            NPC.knockBackResist = 0f;
             NPC.netAlways = true;
             NPC.boss = true;
             NPC.aiStyle = 31;

@@ -150,13 +150,9 @@ namespace TEST.NPCs
             // Custom boss bar
 
             // The following code assigns a music track to the boss in a simple way.
-            if (!Main.dedServ)
-            {
-                Music = MusicLoader.GetMusicSlot(Mod, "Items/Boo");
-            }
+
+
         }
-
-
 
 
 
